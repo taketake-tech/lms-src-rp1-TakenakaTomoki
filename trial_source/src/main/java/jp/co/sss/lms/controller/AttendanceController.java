@@ -134,7 +134,9 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
-
+		//時間・分を「hh:mm」形式に変換
+		studentAttendanceService.formatConversion(attendanceForm);
+		
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);
@@ -144,7 +146,7 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-		// ★追加：更新後に詳細画面へ戻るため、ここでも未入力チェックを行ってModelに詰める
+		// 更新後に詳細画面へ戻るため、ここでも未入力チェックを行ってModelに詰める
 		boolean notEnterCheck = studentAttendanceService
 				.notEnterCheck(attendanceManagementDtoList);
 		model.addAttribute("notEnterCheck", notEnterCheck);
