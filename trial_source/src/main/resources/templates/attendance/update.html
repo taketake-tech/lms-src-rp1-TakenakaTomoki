@@ -101,10 +101,20 @@
 					<th:block th:if="${session.loginUserDto.role != '0001'}">
 						<input type="submit" value="戻る" name="indexCompany" class="btn btn-default" />
 					</th:block>
-					<input type="submit" value="更新" name="complete" class="btn btn-info" />
+					<input type="submit" id="update-btn" value="更新" name="complete" class="btn btn-info" />
 				</div>
-
+				
 			</form>
+			<script>
+
+  			const updateBtn = document.getElementById('update-btn');
+
+  			updateBtn.addEventListener('click', function() {
+
+    			const isOK = window.confirm('更新します。よろしいですか？');
+
+  				});
+			</script>
 		</div>
 	</div>
 
